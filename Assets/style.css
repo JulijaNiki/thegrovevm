@@ -6,9 +6,7 @@ font-family: "Open Sans", sans-serif !important;
     margin: 0px;
 }
 /* Example: adding an ID or a more specific class path */
-body .modal-content {
-    background-color: #ffffff !important; 
-}
+
 .header {
     display: flex;
     align-items: center; /* Keeps logo and nav vertically aligned */
@@ -78,7 +76,7 @@ main {
 /* The popup box design */
 /* Update your .modal-content for a cleaner, modern look */
 .modal-content {
-    background-color: #ffffff;
+    background-color: #ffffff !important;
     padding: 30px;
     border-radius: 12px; /* Increased rounding for a softer feel */
     max-width: 400px;    /* Slightly narrower for a tighter focus */
