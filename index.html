@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Grove VM</title>
+    <link rel="stylesheet" href="Assets/style.css">
+    <script src="Assets/script.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noVNC/1.5.0/noVNC.min.js"></script>
+</head>
+
+<body>
+    <div class="header">
+         <a href="index.html"><img src="Assets/the-grove-vm-logo-full-colour.png" class="logo" alt="The Grove VM Logo" class="logo"></a>
+
+<nav class="nav-links">
+        <a href="rules.html">Rules</a>
+        <a href="contact.html">Contact</a>
+        <a href="FAQ.html">FAQ</a>
+        <button class="login-button" id="openLoginBtn">Login</button>
+    </nav>
+    </div>
+<div id="rulesModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <h1>Welcome to The Grove VM!</h1>
+        <h2>Follow the rules:</h2>
+        <p>1: Always follow the rules.</p>
+        <p>2: Be respectful to others.</p>
+        <p>3: No spamming or advertising.</p>
+        <p>4: Use appropriate language.</p>
+        <p>5: Report any issues to the moderators.</p>
+        
+        <button id="understandBtn" class="modal-button" disabled>I Understood (3s)</button>
+    </div>
+</div>
+<div id="LoginModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content login-box">
+        <h2>Account Login</h2>
+        <form>
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter password" required>
+            </div>
+            <p>Don't have an account? <a href="register.html">Register here</a></p>
+            <button type="submit" class="modal-button">Sign In</button>
+        </form>
+        <button id="closeLoginBtn" class="close-text-btn">Cancel</button>
+    </div>
+</div>
+
+<div class="container mt-5" id="vmGridContainer">
+    <div class="row">
+        
+        <div class="col-sm-6 col-lg-3 g-4">
+            <div class="card" data-cvm-node="vm1">
+                <img src="Assets/windows-xp-thumb.png" class="card-img-top" alt="Windows XP VM Thumbnail" onerror="this.src='https://placehold.co/300x180?text=Windows+XP'">
+                <div class="card-body">
+                    <h5>Windows XP</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-3 g-4">
+            <div class="card" data-cvm-node="vm2">
+                <img src="Assets/windows-7-thumb.png" class="card-img-top" alt="Windows 7 VM Thumbnail" onerror="this.src='https://placehold.co/300x180?text=Windows+7'">
+                <div class="card-body">
+                    <h5>Windows 7</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-3 g-4">
+            <div class="card" data-cvm-node="vm3">
+                <img src="Assets/windows-10-thumb.png" class="card-img-top" alt="Windows 10 VM Thumbnail" onerror="this.src='https://placehold.co/300x180?text=Windows+10'">
+                <div class="card-body">
+                    <h5>Windows 10</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-3 g-4">
+            <div class="card" data-cvm-node="vm4">
+                <img src="Assets/windows-11-thumb.png" class="card-img-top" alt="Windows 11 VM Thumbnail" onerror="this.src='https://placehold.co/300x180?text=Windows+11'">
+                <div class="card-body">
+                    <h5>Windows 11</h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="vm-workspace">
+
+<div id="groveVmScreen" class="vm ratio-4-3">
+    <div id="qemuTerminalDisplay"></div>
+    <div id="qemuDisplayTarget"></div>
+</div>
+
+        <div class="vm-controls">
+        <button type="button" class="ctrl-btn" onclick="changeRatio('ratio-4-3', 'ScreenDisabled43.png')">4:3 (1024x768)</button>
+        <button type="button" class="ctrl-btn" onclick="changeRatio('ratio-3-2', 'ScreenDisabled32.png')">3:2 (1152x768)</button>
+        <button type="button" class="ctrl-btn" onclick="changeRatio('ratio-16-9', 'ScreenDisabled169.png')">16:9 (1366x768)</button>
+    </div>
+
+    <div class="vm-action-bar">
+        <button type="button" class="action-btn" onclick="vmAction('screenshot')">Take Screenshot</button>
+        <button type="button" class="action-btn" onclick="vmAction('cad')">Send Ctrl+Alt+Del</button>
+        <button type="button" class="action-btn warning-btn" onclick="vmAction('restart')">Restart PC</button>
+        <button type="button" class="action-btn danger-btn" onclick="vmAction('shutdown')">Power Off</button>
+    </div>
+</div>
+</body>
+<script type="module">
+    import RFB from 'https://cdn.jsdelivr.net/npm/@novnc/novnc@1.5.0/core/rfb.js';
+    window.RFB = RFB; // Expose it to our global script scope
+</script>
+</html>
