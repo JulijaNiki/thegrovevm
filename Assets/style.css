@@ -5,7 +5,10 @@ font-family: "Open Sans", sans-serif !important;
     padding: 0px;
     margin: 0px;
 }
-
+/* Example: adding an ID or a more specific class path */
+body .modal-content {
+    background-color: #ffffff !important; 
+}
 .header {
     display: flex;
     align-items: center; /* Keeps logo and nav vertically aligned */
